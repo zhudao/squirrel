@@ -10,9 +10,12 @@ lib/*
 data/opencc/
 data/plum/
 download/
-package/Squirrel.pkg
+package/Squirrel*.pkg
 package/sign/*.pem
 package/test-*
+package/generate_keys
+package/sign_update
+package/*.xml
 *~
 .*.swp
 .DS_Store

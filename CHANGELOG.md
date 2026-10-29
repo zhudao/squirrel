@@ -1,3 +1,247 @@
+<a name="1.1.2"></a>
+## 1.1.2 (2026-01-13)
+
+### 構建 | Build
+- use macos-latest image runner (550b355)
+- upgrade action with node 24 (2cc3d17)
+
+### 雜項 | Miscellaneous
+- update Icon that can adapt with system color scheme (714325e)
+- remove unused arg in bump_version (32db10d)
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.1.1...1.1.2
+
+<a name="1.1.1"></a>
+## 1.1.1 (2026-01-11)
+
+### 構建 | Build
+- build universal binary (2154997)
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.1.0...1.1.1
+
+<a name="1.1.0"></a>
+## 1.1.0 (2026-01-11)
+
+### Bug 修復 | Bug Fixes
+- boundary check to prevent crash (#1044) (1a70873)
+- no index offset to an empty string (#1045) (ab1db6c)
+- 開啓 `inline_candidate` 選項後移動光標導致崩潰 (#1047) (6137702)
+- 橫向候選詞列表末尾元素高亮區域渲染錯誤 (#1071)
+
+### 主要功能更新 | Major Updates
+- 「系統原生」風格 `native` 跟隨系統主題切換明暗色調；提高文字對比度 (2fb92e8)
+- `librime` 更新至 1.16.0：
+  - 優化音節切分算法，調整簡拼、歧義切分路徑的權重
+  - 修復糾錯候選排序權重以及與造句的策略衝突
+  - 拼寫運算增設容錯規則 `derive/X/Y/correction`
+  - 輸入方案自動引用組件默認配置 `default:/{navigator,selector}`
+
+### 構建 | Build
+- remove paths filter from release-ci for nightly builds (5232c45)
+- fix sign_update call (d9a9155)
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.0.3...1.1.0
+
+<a name="1.0.3"></a>
+## 1.0.3 (2025-01-23)
+
+#### 主要功能更新
+* 新增翻䈎提示，以`style/show_paging: true/false`控制
+* `librime` 更新至1.13.0：
+  * 數字後標點優化，可用`punctuator/digit_separators`調整
+  * `translator`可用多個`tag`
+  * 詳見 librime [更新紀錄](https://github.com/rime/librime/blob/master/CHANGELOG.md)，含 1.12、1.13 兩個主要版本更新
+
+#### 其它更新內容
+* bug 修復
+  * 自emoji面板切換後無法使用的問題
+  * 每次開機重新布署的問題
+
+#### Major Update
+* Added paging indicator, gated by `style/show_paging: true/false`
+* Update `librime` to 1.13.0:
+  * Optimized punctuator after digits, customizable by `punctuator/digit_separators`
+  * Allow `translator` to take multiple `tag`s
+  * See librime [change log](https://github.com/rime/librime/blob/master/CHANGELOG.md) for details, including 1.12 and 1.13 major updates
+
+#### Other Updates
+* Bug fixes:
+  * IME unavailable after using emoji-selection panel
+  * Deploy upon every start-up regardless of changes
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.0.2...1.0.3
+
+<a name="1.0.2"></a>
+## 1.0.2 (2024-06-07)
+
+#### 其它更新內容
+* bug 修復
+  * 未設定暗色主題時，配色不生效
+  * 橫排時序號偏高
+  * 帶 Alt 的快捷鍵不生效
+  * App 特定設置 inline 不生效
+  * `good_old_caps_lock` 關閉，且 Caps Lock 啓用時，Shift 無法輸入大寫字母
+* Edge 瀏覧器默認行內編輯 (修 #906)
+* 日誌置於 $TMPDIR/rime.squirrel 內，以便查找
+
+#### Other Updates
+* Bug fixes:
+  * `color_scheme` doesn't apply in dark mode when `color_scheme_dark` is not set
+  * Label baseline too high in horizontal orientation
+  * Shortcut with Alt doesn't work
+  * inline option in app specific setting doesn't work
+  * when `good_old_caps_lock` turned to false, and Caps Lock is on, Shift cannot product upper case letter
+* Edge defaults to inline mode (fix #906)
+* Logs dir is now $TMPDIR/rime.squirrel for clarity
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.0.1...1.0.2
+
+<a name="1.0.1"></a>
+## 1.0.1 (2024-06-01)
+
+#### 其它更新內容
+* bug 修復
+  * 不再注冊爲拉丁輸入法，修復 Caps Lock 切換輸入法時不能切換至西文的問題
+  * 修復配色中的 candidate_list_layout, text_orientation 不生效問題
+  * 修復字體名無法解析時，字號不生效問題
+* 不再支持 `style/horizontal` 和 `style/vertical`
+
+#### Other Updates
+* Bug fixes:
+  * Remove Latn repertoire so that switching IME by Caps Lock can toggle Squirrel and Latin input
+  * Fix: candidate_list_layout, text_orientation do not take effect when put in color scheme
+  * Fix: font point is ignored when font face is invalid
+* Drop support for `style/horizontal` and `style/vertical`
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/1.0.0...1.0.1
+
+<a name="1.0.0"></a>
+## 1.0.0 (2024-05-30)
+
+#### 主要功能更新
+* 純 Swift 重寫，代碼更易維護，更易讀，貢獻代碼的門檻更低。今天就來看看源代碼，嘗試動手吧！
+
+#### 其它更新內容
+* UI 設置【**敬請留意**】
+  * `style/candidate_format` 格式修改爲 `"[label]. [candidate] [comment]"`，原格式仍能使用，但建議遷移至更靈活、直觀的新格式
+  * `style/horizontal` 將徹底移除，雖然本版程序仍支持，但會被新控件的默認值覆蓋
+    請使用 `candidate_list_layout`: `stacked`/`linear` 和 `text_orientation`: `horizontal`/`vertical`
+  * `style/label_hilited_color` 已移除，請使用 `style/hilited_candidate_label_color`
+  * `native` 配色小幅修改，減小字號，更像原生輸入法
+* UI 
+  * 在菜單欄新增日志檔案夾，方便快速進入
+  * 序號居中顯示，更像原生輸入法
+* 新增 `--help` 命令行命令，以便查詢支持的命令
+* bug 修復
+  * 減少使用<kbd>⇧</kbd>輸入大寫時造成中英切換的可能性
+* librime：使用 stdbool 後綴 API，以便與 Swift 更好橋接
+
+#### Major Update
+* Migrated code to pure Swift, which is easier to code, read and learn. Build your own Squirrel today!
+
+#### Other Updates
+* UI settings (**Breaking Changes**)
+  * `style/candidate_format` now updated to `"[index]. [candidate] [comment]"`, while the old format still works, please consider migrating to this more readable and flexible format at your convenience
+  * `style/horizontal` will be dropped, it's still supported but will be overwrite by the default values of new options.
+    Please adopt `candidate_list_layout`: `stacked`/`linear` and `text_orientation`: `horizontal`/`vertical`
+  * `style/label_hilited_color` is removed, please use `style/hilited_candidate_label_color` instead
+  * `native` color scheme is updated with smaller font size, to better match macOS builtin IME
+* UI
+  * Added a menu item for logs folder with easy access
+  * labels will vertically center if label font is smaller than candidate font, to better match macOS builtin IME
+* Added `--help` command line argument
+* Bug fixes:
+  * Reduce the chance that ascii mode may unintentionally switch when pressing <kbd>⇧</kbd> to enter Cap case
+* librime: Use stdbool flavored API, for better Swift interoperation
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/0.18...1.0.0
+
+<a name="0.18"></a>
+## 0.18 (2024-05-04)
+
+#### 主要功能更新
+* 現可設定非高亮候選項背景色：
+  * 以 `preset_color_schemes/xxx/candidate_back_color: 0xAABBGGRR` 設定，未設定則不啓用本功能
+  * 以 `style/surrounding_extra_expansion` 控制非高亮候選背景大小，正數則相對高亮背景擴大，負數則相對高亮背景收縮，默認爲0
+* 更稳定的介面渲染，尤其繪文字無論橫排豎排皆能穩定顯示，行高不會跳變
+* 支持鼠標操作：
+  * 鼠標懸浮則更改高亮候選，點擊則選定候選，滾輪和觸控板滑動則翻䈎
+  * 點擊編碼區則可前後移動光標位置
+* 其它介面改進：
+  * 解決候選框首次出現可能位於屏幕一角的問題
+  * `style/border_height`、`style/border_width`、`style/line_spacing`、`style/spacing`現可正確處理負值
+  * 字號可包含小數
+  * 序號字號不同於候選字號時，序號居中
+  * 可以`style/status_message_type`: `mix`(default) / `long` / `short`控制狀態改變時如何展示狀態標籤，默認短標籤優先，無短標籤則使用完整標籤，不再自動截取完整標籤首字，除非設爲`short`
+  * 以`style/memorize_size`: `true`/`false`控制候選標是否在接觸屏幕邊緣時有粘性
+  * `style/alpha`可爲0，爲0則完全隱藏候選框
+  * 以`style/shadow_size`設定高亮候選背景的陰影，默認爲0，即無陰影
+  * 以`style/mutual_exclusive`: `true`/`false`控制半透明顏色是否互相疊加，默認爲`false`，即互相疊加
+* `librime` 更新至1.11.2：
+  * 詳見 librime [更新紀錄](https://github.com/rime/librime/blob/master/CHANGELOG.md)，含 1.9、1.10、1.11 三個主要版本更新
+* librime 插件現單獨構建，不再合併於 librime 內，本安裝包含 `lua`、`octagram`、`predict` 三個插件
+* 最低支持的系統應爲 13.0，14.0 以上系統經過較好測試
+
+#### 其它更新內容
+* 啓用CI自動構建
+* 應用 Clang 格式標準化
+* 更新已過時的方法
+* 支持沙盒機制
+
+#### Main Updates
+* Surrounding high lights for all candidates:
+  * Set `preset_color_schemes/xxx/candidate_back_color` to enable (Not specified unless explicitly defined)
+  * `style/surrounding_extra_expansion` controls the relative size to the selected candidate's surrounding block. Negative value means smaller, while positive means larger, default to 0.
+* More reliable text layout, especially in vertical mode, and with exotic characters like Emoji.
+* Mouse interactions:
+  * Hover over to change selection, click on any candidate to select, and swipe or scroll to change page
+  * Click in preedit area to change caret position
+* Other UI improvements:
+  * Resolve a issue that Squirrel panel shows in corner on first launch
+  * `style/border_height`, `style/border_width`, `style/line_spacing` and `style/spacing` can now be negative.
+  * All `font_size` accepts float number.
+  * Labels are vertically centered when using a different `label_font_size` from the main `font_size`
+  * Add `style/status_message_type`: `mix(default) / long / short` to Handle abbrev status label when status updates
+  * Add `style/memorize_size: true/false` to control sticking panel width behavior 
+  * `style/alpha: 0` is now valid, setting so completely hides the panel
+  * Add `style/shadow_size` to specify shadow under selected candidate. Default to `0` with no shadow.
+  * Add `style/mutual_exclusive`: `true`/`false` to allow colors not stacking on each other. Default to `false`
+* `librime` updated to 1.11.2:
+  * See librime [change log](https://github.com/rime/librime/blob/master/CHANGELOG.md) for details, including 1.9, 1.10 and 1.11 major updates
+* librime plugins are built separately, no longer integrated inside librime library. This install package is compiled with `lua`, `octagram` and `predict` plugins
+* Minimum OS supported should be 13.0, while 14.0+ is better tested
+
+#### Other Updates
+* Adopts CI workflow
+* Applies Clang linting
+* Modernized several deprecated methods
+* Supports sandbox
+
+#### 完整更新列表 Change Log
+* build: specify build target OS in makefile by @LEOYoon-Tsaw in https://github.com/rime/squirrel/pull/727
+* Consolidated update to Squirrel by @LEOYoon-Tsaw in https://github.com/rime/squirrel/pull/749
+* Update INSTALL.md: Fix script by @EdgarDegas in https://github.com/rime/squirrel/pull/800
+* fix action-changelog.sh by @hezhizhen in https://github.com/rime/squirrel/pull/794
+* Update weasel introduction in README.md by @determ1ne in https://github.com/rime/squirrel/pull/777
+* Upgrade GitHub action to v4 by @Bambooin in https://github.com/rime/squirrel/pull/834
+* chore: use macos 14 runner with M1 by @Bambooin in https://github.com/rime/squirrel/pull/835
+* Add mac app sandbox support. by @ShikiSuen in https://github.com/rime/squirrel/pull/841
+* Apply clang format by @Bambooin in https://github.com/rime/squirrel/pull/836
+* fix: fix wrong git blame ignore by @Bambooin in https://github.com/rime/squirrel/pull/845
+* replace deprecated API calls by @groverlynn in https://github.com/rime/squirrel/pull/846
+* fix(SquirrelPanel): text shown in top-left corner by @lotem in https://github.com/rime/squirrel/pull/856
+* deps: update librime to 1.11.0 by @ksqsf in https://github.com/rime/squirrel/pull/860
+* build(ci): nightly release by @ksqsf in https://github.com/rime/squirrel/pull/861
+* ci: disable nightly build in forked repos by @Bambooin in https://github.com/rime/squirrel/pull/862
+
+#### 新增貢獻者 New Contributors
+* @EdgarDegas made their first contribution in https://github.com/rime/squirrel/pull/800
+* @hezhizhen made their first contribution in https://github.com/rime/squirrel/pull/794
+* @determ1ne made their first contribution in https://github.com/rime/squirrel/pull/777
+* @ksqsf made their first contribution in https://github.com/rime/squirrel/pull/860
+
+**Full Changelog**: https://github.com/rime/squirrel/compare/0.16.2...0.18
+
 <a name="0.16.2"></a>
 ## 0.16.2 (2023-02-05)
 
